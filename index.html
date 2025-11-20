@@ -1,311 +1,350 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riya Bhosale - Business Consultant for Founders</title>
-    <meta name="description" content="Helping early-stage founders simplify business, build strategy, and scale smart. Book a clarity call with Riya Bhosale.">
+    <title>Riya Bhosale | Strategic consultant</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* CSS styles for the website */
-        :root {
-            --primary-color: #0077b5; /* LinkedIn Blue */
-            --secondary-color: #f4f4f4; /* Light Grey */
-            --accent-color: #ff914d; /* Orange for emphasis */
-            --dark-color: #333;
-            --light-color: #fff;
-            --max-width: 1000px;
-        }
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            --gold: #d4af37;
+            --dark-blue: #0B0E14;
+            --cream: #F5F5F1;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            background-color: var(--light-color);
-            color: var(--dark-color);
-            scroll-behavior: smooth;
-        }
-
-        .container {
-            max-width: var(--max-width);
-            margin: auto;
-            padding: 0 2rem;
-        }
-
-        h1, h2, h3 {
+            background-color: var(--dark-blue);
+            color: var(--cream);
             font-family: 'Montserrat', sans-serif;
-            color: var(--primary-color);
-            line-height: 1.2;
+            overflow-x: hidden;
         }
 
-        a.cta-button {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: var(--light-color);
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+        h1, h2, h3, .serif-font {
+            font-family: 'Playfair Display', serif;
         }
 
-        a.cta-button:hover {
-            transform: translateY(-3px);
-            background-color: #ff7d2b;
+        /* Film Grain Overlay for Texture */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.05;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
         }
 
-        .section {
-            padding: 4rem 0;
-            text-align: center;
+        /* Custom Selection Color */
+        ::selection {
+            background: var(--gold);
+            color: black;
         }
 
-        /* --- Header & Hero Section --- */
-        .hero {
-            background-color: var(--secondary-color);
-            color: var(--dark-color);
-            padding: 6rem 0;
+        /* Smooth Scroll hiding scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 10px;
         }
 
-        .hero-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2rem;
+        /* Image Masks */
+        .hero-mask {
+            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
         }
 
-        .hero-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid var(--light-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .hero-text h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .hero-text p.subheading {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 1.5rem;
-        }
-
-        /* --- Problem/Solution Section --- */
-        .problem-solution {
-            background-color: var(--light-color);
-            padding: 4rem 0;
-        }
-
-        .problem-solution h2 {
-            margin-bottom: 2rem;
-        }
-
-        .points-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .point-card {
-            background-color: var(--secondary-color);
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-            text-align: left;
-            transition: transform 0.3s ease;
-        }
-
-        .point-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .point-card h3 {
-            margin-bottom: 0.5rem;
-            font-size: 1.25rem;
-        }
-
-        /* --- Services Section --- */
-        .services {
-            background-color: var(--primary-color);
-            color: var(--light-color);
-        }
-
-        .services h2 {
-            color: var(--light-color);
-            margin-bottom: 2rem;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: left;
-        }
-
-        .service-card h3 {
-            color: var(--light-color);
-            margin-bottom: 0.5rem;
-        }
-        
-        .service-card .price {
-            font-weight: 700;
-            color: var(--accent-color);
-            margin-top: 1rem;
-            display: block;
-        }
-
-        /* --- Testimonials Section --- */
-        .testimonials {
-            background-color: var(--light-color);
-        }
-
-        .testimonials h2 {
-            margin-bottom: 2rem;
-        }
-
-        .testimonial-card {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: var(--secondary-color);
-            padding: 2rem;
-            border-left: 5px solid var(--accent-color);
-            border-radius: 8px;
-            font-style: italic;
-            position: relative;
-        }
-
-        .testimonial-card p {
-            margin-bottom: 1rem;
-        }
-
-        .testimonial-card span {
-            font-style: normal;
-            font-weight: 700;
-            color: var(--primary-color);
-            display: block;
-            text-align: right;
-        }
-
-        /* --- Contact Section --- */
-        .contact {
-            background-color: var(--secondary-color);
-        }
-
-        .contact h2 {
-            margin-bottom: 1rem;
-        }
-
-        /* --- Footer --- */
-        .footer {
-            background-color: var(--dark-color);
-            color: var(--light-color);
-            padding: 2rem 0;
-            text-align: center;
-            font-size: 0.9rem;
+        .text-outline {
+            -webkit-text-stroke: 1px rgba(212, 175, 55, 0.3);
+            color: transparent;
         }
     </style>
 </head>
-<body>
+<body class="antialiased">
 
-    <header class="hero">
-        <div class="container hero-content">
-            <img src="placeholder.jpg" alt="Riya Bhosale" class="hero-image">
-            <div class="hero-text">
-                <p class="subheading">Hello, I'm Riya Bhosale</p>
-                <h1>lets build your business TODAY </h1>
-                <p class="subheading">I help individuals build there business </p>
-                <a href="#contact" class="cta-button">Book a Clarity Call</a>
+    <div class="noise-overlay"></div>
+
+    <div id="preloader" class="fixed inset-0 z-[100] bg-[#000] flex items-center justify-center">
+        <h1 class="text-gold text-4xl serif-font italic" style="color: #d4af37;">Riya Bhosale.</h1>
+    </div>
+
+    <nav class="fixed w-full z-50 px-8 py-6 flex justify-between items-center mix-blend-difference text-white">
+        <a href="#" class="text-2xl serif-font font-bold tracking-wide">RB.</a>
+        <div class="hidden md:flex gap-12 text-xs uppercase tracking-[0.2em]">
+            <a href="#about" class="hover:text-[#d4af37] transition duration-300">Who I Am</a>
+            <a href="#expertise" class="hover:text-[#d4af37] transition duration-300">Expertise</a>
+            <a href="#contact" class="hover:text-[#d4af37] transition duration-300">Contact</a>
+        </div>
+    </nav>
+
+    <header class="relative h-screen w-full overflow-hidden flex items-center justify-center">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop" 
+                 class="w-full h-full object-cover opacity-60 scale-110 hero-img" 
+                 alt="Riya Bhosale">
+            <div class="absolute inset-0 bg-gradient-to-t from-[var(--dark-blue)] via-transparent to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-4">
+            <p class="text-[#d4af37] text-sm uppercase tracking-[0.4em] mb-6 reveal-hero">Business Consultant & Strategist</p>
+            <h1 class="text-6xl md:text-9xl serif-font italic mb-2 reveal-hero">Hi, I am Riya.</h1>
+            <h2 class="text-3xl md:text-5xl font-light text-gray-300 reveal-hero">I Architect <span class="serif-font italic text-[#d4af37]">Growth.</span></h2>
+            
+            <div class="mt-12 reveal-hero">
+                <div class="w-[1px] h-24 bg-[#d4af37] mx-auto animate-bounce"></div>
             </div>
         </div>
     </header>
 
-    <section class="section problem-solution">
-        <div class="container">
-            <h2>Are You a Founder Feeling Overwhelmed?</h2>
-            <p>You're full of great ideas, but:</p>
-            <div class="points-container">
-                <div class="point-card">
-                    <h3>❌ You lack a clear roadmap.</h3>
-                    <p>Your business feels like a series of reactive decisions rather than a proactive plan.</p>
-                </div>
-                <div class="point-card">
-                    <h3>❌ You're wasting time and money.</h3>
-                    <p>You're not sure which tasks to prioritize to drive real revenue and growth.</p>
-                </div>
-                <div class="point-card">
-                    <h3>❌ You can't scale.</h3>
-                    <p>Your business is too reliant on you, and you don't have repeatable systems in place.</p>
+    <section id="about" class="py-32 px-6 md:px-20 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-20 items-center">
+            <div class="space-y-8">
+                <h2 class="text-5xl serif-font leading-tight">
+                    Blending <span class="text-[#d4af37] italic">Logic</span> with <br>
+                    Strategic <span class="text-[#d4af37] italic">Intuition.</span>
+                </h2>
+                <p class="text-lg text-gray-400 leading-relaxed font-light">
+                    A business isn't just numbers on a spreadsheet; it's a living ecosystem. I hold a <strong>Bachelor's in Computer Science</strong> and a <strong>Master’s in Finance Management</strong>. 
+                </p>
+                <p class="text-lg text-gray-400 leading-relaxed font-light">
+                    This rare combination allows me to decode complex data patterns (the logic) and translate them into profitable business strategies (the intuition). Currently scaling <strong>TheFineAce</strong>, I help organizations find their "North Star" in a chaotic market.
+                </p>
+                <div class="pt-6 flex gap-12">
+                    <div>
+                        <span class="block text-4xl serif-font text-[#d4af37]">3+</span>
+                        <span class="text-xs uppercase tracking-widest text-gray-500">Years Experience</span>
+                    </div>
+                    <div>
+                        <span class="block text-4xl serif-font text-[#d4af37]">500+</span>
+                        <span class="text-xs uppercase tracking-widest text-gray-500">Founders Helped</span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <section id="services" class="section services">
-        <div class="container">
-            <h2>The Solution: Strategic Services for Your Business</h2>
-            <p>I provide tailored guidance and hands-on support to help you:</p>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>60-min Clarity Call</h3>
-                    <p>Get a clear, actionable 90-day plan. We'll identify your biggest challenge and outline immediate steps you can take tomorrow.</p>
-                    <span class="price">Starting from ₹2,500</span>
-                </div>
-                <div class="service-card">
-                    <h3>Startup Strategy Blueprint</h3>
-                    <p>A comprehensive, ready-to-execute strategy document covering positioning, pricing, and a go-to-market plan designed for your unique business.</p>
-                    <span class="price">₹4,999</span>
-                </div>
-                <div class="service-card">
-                    <h3>LinkedIn Profile & Positioning Makeover</h3>
-                    <p>Optimize your professional presence to attract the right founders, partners, and investors, building trust and authority.</p>
-                    <span class="price">₹3,000</span>
+            
+            <div class="relative h-[600px] w-full overflow-hidden rounded-t-[10rem] border border-[#d4af37]/30 image-trigger">
+                <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2664&auto=format&fit=crop" 
+                     class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700"
+                     alt="Meeting Strategy">
+                
+                <div class="absolute bottom-10 right-10 bg-[#d4af37] text-black p-6 rounded-full animate-spin-slow">
+                    <svg viewBox="0 0 100 100" width="100" height="100">
+                        <path id="curve" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent"/>
+                        <text font-size="13" font-weight="bold">
+                            <textPath href="#curve">STRATEGY • GROWTH • EXECUTION •</textPath>
+                        </text>
+                    </svg>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section testimonials">
-        <div class="container">
-            <h2>What My Clients Say</h2>
-            <div class="testimonial-card">
-                <p>"Riya helped us go from a vague idea to a concrete, 3-month plan that doubled our leads in the first quarter."</p>
-                <span>— Client Name, Founder</span>
+    <section id="expertise" class="relative h-[300vh] bg-white text-black">
+        <div class="sticky top-0 h-screen flex items-center overflow-hidden pin-container bg-[#F5F5F1]">
+            <div class="absolute top-10 left-10 md:left-20">
+                <p class="text-sm uppercase tracking-widest mb-2 text-[#d4af37]">My Services</p>
+                <h2 class="text-4xl serif-font">The Blueprint</h2>
             </div>
-            </div>
-    </section>
 
-    <section id="contact" class="section contact">
-        <div class="container">
-            <h2>Ready for Clarity and Growth?</h2>
-            <p>Let's turn your vision into a reality. Book your clarity call today.</p>
-            <a href="mailto:roariya216@gmail.com" class="cta-button">Book a Clarity Call</a>
+            <div class="flex gap-20 pl-20 md:pl-40 pr-20 items-center horizontal-wrap">
+                
+                <div class="min-w-[85vw] md:min-w-[40vw] h-[60vh] bg-[#0B0E14] text-white p-10 md:p-14 flex flex-col justify-between border-l-4 border-[#d4af37]">
+                    <div class="text-6xl opacity-20 font-bold">01</div>
+                    <div>
+                        <h3 class="text-3xl serif-font italic mb-4 text-[#d4af37]">Strategic Consulting</h3>
+                        <p class="text-gray-400 font-light leading-relaxed text-lg">
+                            We strip away the noise. I help you identify operational bottlenecks and scalable opportunities. From ideation to execution, we build a roadmap that actually works.
+                        </p>
+                    </div>
+                    <div class="w-full h-[1px] bg-white/20"></div>
+                </div>
+
+                <div class="min-w-[85vw] md:min-w-[40vw] h-[60vh] bg-[#0B0E14] text-white p-10 md:p-14 flex flex-col justify-between border-l-4 border-[#d4af37]">
+                    <div class="text-6xl opacity-20 font-bold">02</div>
+                    <div>
+                        <h3 class="text-3xl serif-font italic mb-4 text-[#d4af37]">Financial Analysis</h3>
+                        <p class="text-gray-400 font-light leading-relaxed text-lg">
+                            Money tells a story. With my PGDM in Finance, I help you read it. Budgeting, forecasting, and cash-flow management to ensure your burn rate doesn't burn you out.
+                        </p>
+                    </div>
+                    <div class="w-full h-[1px] bg-white/20"></div>
+                </div>
+
+                <div class="min-w-[85vw] md:min-w-[40vw] h-[60vh] bg-[#0B0E14] text-white p-10 md:p-14 flex flex-col justify-between border-l-4 border-[#d4af37]">
+                    <div class="text-6xl opacity-20 font-bold">03</div>
+                    <div>
+                        <h3 class="text-3xl serif-font italic mb-4 text-[#d4af37]">Market Growth</h3>
+                        <p class="text-gray-400 font-light leading-relaxed text-lg">
+                            Growth isn't luck; it's data. Utilizing computer science logic, I analyze market trends to position your brand exactly where your customers are looking.
+                        </p>
+                    </div>
+                    <div class="w-full h-[1px] bg-white/20"></div>
+                </div>
+
+                 <div class="min-w-[50vw] h-[60vh] overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover grayscale" alt="Building">
+                    <div class="absolute inset-0 flex items-center justify-center bg-black/50">
+                        <h3 class="text-4xl serif-font text-white">Ready to Build?</h3>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 
-    <footer class="footer">
-        <p>&copy; 2023 Riya Bhosale. All rights reserved.</p>
+    <section class="py-32 px-6 md:px-20 max-w-5xl mx-auto">
+        <h2 class="text-center text-4xl serif-font mb-20">The Professional <span class="italic text-[#d4af37]">Arc.</span></h2>
+
+        <div class="space-y-12">
+            <div class="group flex flex-col md:flex-row gap-8 p-8 border border-white/10 hover:border-[#d4af37] transition duration-500 bg-white/5 backdrop-blur-sm rounded-lg">
+                <div class="md:w-1/4">
+                    <span class="text-[#d4af37] font-bold">Present</span>
+                    <h3 class="text-2xl font-bold mt-2">Founder</h3>
+                </div>
+                <div class="md:w-3/4">
+                    <h4 class="text-xl serif-font italic mb-2">TheFineAce</h4>
+                    <p class="text-gray-400 font-light">Helping early-stage organizations translate ideas into scalable business strategies. Simplifying complex operations.</p>
+                </div>
+            </div>
+
+            <div class="group flex flex-col md:flex-row gap-8 p-8 border border-white/10 hover:border-[#d4af37] transition duration-500 bg-white/5 backdrop-blur-sm rounded-lg">
+                <div class="md:w-1/4">
+                    <span class="text-gray-500">2020-2022</span>
+                    <h3 class="text-2xl font-bold mt-2">Associate</h3>
+                </div>
+                <div class="md:w-3/4">
+                    <h4 class="text-xl serif-font italic mb-2">Om Sai</h4>
+                    <p class="text-gray-400 font-light">Spearheaded marketing initiatives to promote clothing items and increase sales. Managed inventory logic.</p>
+                </div>
+            </div>
+
+            <div class="group flex flex-col md:flex-row gap-8 p-8 border border-white/10 hover:border-[#d4af37] transition duration-500 bg-white/5 backdrop-blur-sm rounded-lg">
+                <div class="md:w-1/4">
+                    <span class="text-gray-500">Education</span>
+                    <h3 class="text-2xl font-bold mt-2">Mastery</h3>
+                </div>
+                <div class="md:w-3/4">
+                    <h4 class="text-xl serif-font italic mb-2">Pune University & SRTMU</h4>
+                    <p class="text-gray-400 font-light">PGDM in Finance Management & Bachelor's in Computer Science. The intersection of tech and money.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="relative py-32 bg-[#d4af37] text-black text-center overflow-hidden">
+        <div class="relative z-10 px-6">
+            <p class="uppercase tracking-widest text-sm font-bold mb-6">Open to Global Opportunities</p>
+            <h2 class="text-6xl md:text-8xl serif-font mb-10 leading-tight">Let's Build <br> Something <span class="italic text-white">Legendary.</span></h2>
+            
+            <a href="mailto:riya@example.com" class="inline-block border-2 border-black px-12 py-4 text-lg font-bold uppercase tracking-widest hover:bg-black hover:text-[#d4af37] transition duration-300">
+                Get in Touch
+            </a>
+
+            <div class="mt-24 grid grid-cols-3 max-w-lg mx-auto text-sm font-bold border-t border-black/20 pt-8">
+                <a href="#" class="hover:text-white transition">LinkedIn</a>
+                <a href="#" class="hover:text-white transition">Instagram</a>
+                <a href="#" class="hover:text-white transition">Email</a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-0 left-0 w-full text-[20vw] leading-none font-bold opacity-5 pointer-events-none select-none">
+            RIYA
+        </div>
     </footer>
 
+    <script>
+        // Register GSAP Plugins
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Preloader Animation
+        window.addEventListener("load", () => {
+            const tl = gsap.timeline();
+            tl.to("#preloader h1", {
+                y: -50,
+                opacity: 0,
+                duration: 1,
+                delay: 0.5
+            })
+            .to("#preloader", {
+                yPercent: -100,
+                duration: 1,
+                ease: "power4.inOut"
+            })
+            .from(".reveal-hero", {
+                y: 100,
+                opacity: 0,
+                stagger: 0.2,
+                duration: 1.2,
+                ease: "power4.out"
+            }, "-=0.5")
+            .from(".hero-img", {
+                scale: 1.2,
+                duration: 2,
+                ease: "power2.out"
+            }, "-=1.5");
+        });
+
+        // Parallax Effect for Hero Image
+        gsap.to(".hero-img", {
+            yPercent: 30,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "header",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+        // About Section Image Reveal
+        gsap.from(".image-trigger", {
+            scrollTrigger: {
+                trigger: "#about",
+                start: "top 70%",
+            },
+            x: 100,
+            opacity: 0,
+            duration: 1.5,
+            ease: "power3.out"
+        });
+
+        // HORIZONTAL SCROLL LOGIC
+        let sections = gsap.utils.toArray(".horizontal-wrap > div");
+        
+        gsap.to(".horizontal-wrap", {
+            xPercent: -100 * (sections.length - 1) / sections.length * 1.2, // Calculation to scroll full width
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#expertise",
+                pin: true,
+                scrub: 1,
+                // Adjust the end value to control how long the scroll lasts
+                end: "+=3000", 
+            }
+        });
+
+        // Floating Badge Animation
+        gsap.to(".animate-spin-slow", {
+            rotation: 360,
+            repeat: -1,
+            duration: 10,
+            ease: "linear"
+        });
+
+    </script>
 </body>
 </html>
-
