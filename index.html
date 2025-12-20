@@ -1336,6 +1336,358 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIYA | Strategy & Vision</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;0,900;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Montserrat'], serif: ['Playfair Display'] },
+                    colors: { 
+                        brand: { 
+                            peach: '#fdf0e6',      /* Main Background */
+                            orange: '#e89b6a',     /* Primary Accent */
+                            terracotta: '#b8653d', /* Deep Accent */
+                            cream: '#fffaf5',      /* Card Background */
+                            ink: '#2d1b14'         /* Text */
+                        } 
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #fdf0e6; color: #2d1b14; overflow-x: hidden; }
+        #bg-canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.4; pointer-events: none; }
+        
+        .nav-overlay { clip-path: circle(0% at 95% 5%); transition: clip-path 0.6s cubic-bezier(0.77, 0, 0.175, 1); opacity: 0; }
+        .nav-overlay.active { clip-path: circle(150% at 95% 5%); opacity: 1; pointer-events: all; }
+
+        .map-path { stroke-dasharray: 10, 10; animation: dash 3s linear infinite; }
+        @keyframes dash { to { stroke-dashoffset: -20; } }
+        
+        .level-node.active { border-color: #b8653d; background: #fffaf5; box-shadow: 0 10px 30px rgba(184, 101, 61, 0.2); }
+        .blur-title { filter: blur(12px); transition: filter 1s ease; }
+        .book-card:hover .blur-title { filter: blur(3px); }
+
+        .service-card { transition: all 0.4s ease; border-bottom: 1px solid rgba(184, 101, 61, 0.1); }
+        .service-card:hover { background-color: #fffaf5; padding-left: 2rem; border-bottom: 1px solid #b8653d; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <canvas id="bg-canvas"></canvas>
+
+    <nav class="fixed w-full z-[100] px-6 py-6 transition-all duration-500" id="navbar">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="font-serif font-black text-3xl text-brand-terracotta tracking-tighter">RIYA.</a>
+            <div class="hidden md:flex space-x-10 text-[10px] uppercase tracking-[0.3em] font-bold">
+                <a href="#home" class="hover:text-brand-orange">Home</a>
+                <a href="#services" class="hover:text-brand-orange">What I Do</a>
+                <a href="#journey" class="hover:text-brand-orange">The Map</a>
+                <a href="#pulse" class="hover:text-brand-orange">Live</a>
+                <a href="#book" class="hover:text-brand-orange">The Book</a>
+            </div>
+            <button id="menu-btn" class="relative z-[110] p-2 text-brand-terracotta md:hidden">
+                <i class="fa-solid fa-bars-staggered text-2xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div id="mobile-nav" class="nav-overlay fixed inset-0 bg-brand-peach z-[105] flex flex-col items-center justify-center">
+        <div class="space-y-8 text-center">
+            <a href="#home" class="m-link block font-serif text-5xl font-bold text-brand-ink">Home</a>
+            <a href="#services" class="m-link block font-serif text-5xl font-bold text-brand-ink">What I Do</a>
+            <a href="#journey" class="m-link block font-serif text-5xl font-bold text-brand-ink">The Map</a>
+            <a href="#book" class="m-link block font-serif text-5xl font-bold text-brand-ink">The Book</a>
+        </div>
+    </div>
+
+    <section id="home" class="min-h-screen flex items-center px-6 pt-20">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div class="space-y-8">
+                <span class="text-brand-terracotta font-bold text-xs uppercase tracking-[0.4em]">Business Architect</span>
+                <h1 class="font-serif text-7xl md:text-9xl leading-[0.85] font-black text-brand-ink">
+                    SOFT<br><span class="text-brand-orange italic font-light">POWER.</span>
+                </h1>
+                <p class="max-w-md text-brand-ink/70 leading-relaxed text-lg border-l-3 border-brand-orange pl-6">
+                    I translate chaotic ambition into timeless strategy. Helping modern founders build legacies through precision operations and brand storytelling.
+                </p>
+                <div class="flex gap-6">
+                    <a href="#services" class="px-10 py-4 bg-brand-terracotta text-white font-bold uppercase tracking-widest text-xs shadow-xl shadow-brand-terracotta/20 hover:bg-brand-orange transition-all">My Services</a>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute inset-0 bg-brand-orange/20 rounded-full blur-[120px] -z-10"></div>
+                <img src="https://images.unsplash.com/photo-1594744803329-e58b31de3654?q=80&w=1000&auto=format&fit=crop" class="w-full rounded-2xl shadow-2xl sepia-[0.2] contrast-[1.1]">
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-32 bg-brand-cream/50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-12">
+                <div class="md:col-span-5">
+                    <h2 class="font-serif text-5xl md:text-6xl text-brand-ink leading-tight">How I help<br><span class="italic text-brand-orange">you scale.</span></h2>
+                    <p class="mt-6 text-brand-ink/60 max-w-sm">I don't just give advice. I build the systems, scripts, and strategies that allow you to step out of the weeds and into the CEO role.</p>
+                </div>
+                <div class="md:col-span-7 mt-12 md:mt-0">
+                    <div class="service-card py-8 flex items-start gap-8 group">
+                        <span class="font-serif text-brand-orange/40 text-3xl">01</span>
+                        <div>
+                            <h4 class="text-2xl font-serif font-bold text-brand-ink">Strategic Operations</h4>
+                            <p class="text-brand-ink/60 mt-2">I audit your current workflows to find the "leaks." We rebuild your internal systems so they run without you needing to micromanage.</p>
+                        </div>
+                    </div>
+                    <div class="service-card py-8 flex items-start gap-8 group">
+                        <span class="font-serif text-brand-orange/40 text-3xl">02</span>
+                        <div>
+                            <h4 class="text-2xl font-serif font-bold text-brand-ink">High-Ticket Sales Framing</h4>
+                            <p class="text-brand-ink/60 mt-2">Leveraging my years on the sales floor, I help you refine your offer and pitch to close luxury and enterprise-level clients with ease.</p>
+                        </div>
+                    </div>
+                    <div class="service-card py-8 flex items-start gap-8 group">
+                        <span class="font-serif text-brand-orange/40 text-3xl">03</span>
+                        <div>
+                            <h4 class="text-2xl font-serif font-bold text-brand-ink">Legacy Branding</h4>
+                            <p class="text-brand-orange font-bold text-[10px] uppercase tracking-widest mt-1">Founders Only</p>
+                            <p class="text-brand-ink/60 mt-2">We position you as the ultimate authority in your space, ensuring your personal brand attracts the right opportunities while you sleep.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="journey" class="py-32 relative">
+        <div class="text-center mb-24">
+            <h2 class="font-serif text-6xl text-brand-ink">The Evolution</h2>
+            <p class="text-brand-terracotta tracking-[0.3em] uppercase text-xs font-bold mt-4">Follow the path of growth</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto relative h-[1800px]" id="map-track">
+            <svg class="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
+                <path id="path-line" d="M 50% 0 Q 85% 300, 50% 600 T 50% 1200 T 50% 1800" fill="none" stroke="#e89b6a" stroke-width="3" class="map-path" stroke-opacity="0.4"/>
+            </svg>
+
+            <div id="player" class="absolute left-1/2 -translate-x-1/2 w-16 h-16 z-50">
+                <div class="w-full h-full bg-brand-orange rounded-full border-4 border-white shadow-xl overflow-hidden">
+                     <img src="https://images.unsplash.com/photo-1594744803329-e58b31de3654?q=80&w=100" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <div class="absolute top-[100px] left-1/2 -translate-x-1/2 text-center">
+                <div class="level-node w-16 h-16 rounded-full border-2 border-brand-orange/20 flex items-center justify-center active mb-4">
+                    <i class="fa-solid fa-graduation-cap text-brand-terracotta"></i>
+                </div>
+                <p class="font-serif font-bold">Foundation</p>
+            </div>
+
+            <div class="absolute top-[600px] left-[15%] text-center">
+                <div class="level-node w-16 h-16 rounded-full border-2 border-brand-orange/20 flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-gem text-brand-terracotta"></i>
+                </div>
+                <p class="font-serif font-bold">Luxury Sales</p>
+            </div>
+
+            <div class="absolute top-[1100px] right-[15%] text-center">
+                <div class="level-node w-16 h-16 rounded-full border-2 border-brand-orange/20 flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-chart-line text-brand-terracotta"></i>
+                </div>
+                <p class="font-serif font-bold">Scaling Expert</p>
+            </div>
+
+            <div class="absolute top-[1650px] left-1/2 -translate-x-1/2 text-center">
+                <div class="level-node w-24 h-24 rounded-full border-4 border-brand-terracotta flex items-center justify-center bg-brand-terracotta text-white mb-4 shadow-2xl animate-pulse">
+                    <i class="fa-solid fa-crown text-3xl"></i>
+                </div>
+                <h4 class="font-serif text-3xl font-black text-brand-ink">FOUNDER</h4>
+            </div>
+        </div>
+    </section>
+
+    <section id="pulse" class="py-24 bg-brand-ink text-brand-peach">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="font-serif text-5xl mb-16 text-center">Live Pulse</h2>
+            <div class="grid md:grid-cols-3 gap-10">
+                <div class="p-10 border border-brand-peach/10 hover:border-brand-orange transition-colors">
+                    <i class="fa-brands fa-x-twitter text-brand-orange text-2xl mb-6"></i>
+                    <p class="text-lg italic font-light">"Stop building features. Start building trust. High-ticket is a feelings game, not a facts game."</p>
+                </div>
+                <div class="p-10 border border-brand-peach/10 hover:border-brand-orange transition-colors">
+                    <i class="fa-brands fa-linkedin-in text-brand-orange text-2xl mb-6"></i>
+                    <p class="text-lg font-light">Shared: 3 Frameworks for transitioning from Founder to CEO without the burnout.</p>
+                </div>
+                <div class="p-10 border border-brand-peach/10 hover:border-brand-orange transition-colors">
+                    <i class="fa-brands fa-medium text-brand-orange text-2xl mb-6"></i>
+                    <p class="text-lg font-light">New Article: Why your branding feels "cheap" and how to fix the aesthetic gap.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="book" class="py-32">
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
+            <div class="book-card w-72 h-[450px] bg-brand-cream border-2 border-brand-orange/30 relative shadow-2xl mx-auto flex flex-col justify-center items-center p-8 group overflow-hidden">
+                <div class="absolute -right-20 -top-20 w-40 h-40 bg-brand-orange/10 rounded-full blur-3xl"></div>
+                <h3 class="font-serif text-4xl font-bold text-brand-ink blur-title text-center leading-tight">THE UNTOLD<br>DIARY</h3>
+                <p class="mt-8 text-[10px] tracking-[0.5em] uppercase text-brand-terracotta font-bold">BY RIYA</p>
+            </div>
+            <div>
+                <h2 class="font-serif text-6xl mb-6 text-brand-ink">The Secret Manual.</h2>
+                <p class="text-brand-ink/60 text-xl leading-relaxed mb-10">I’m keeping the title hidden for the inner circle. It’s a blueprint for those who want to build something that lasts centuries, not months.</p>
+                <form class="flex">
+                    <input type="email" placeholder="Enter Email" class="bg-white border-none p-5 w-full focus:ring-2 focus:ring-brand-orange shadow-inner outline-none">
+                    <button class="bg-brand-terracotta text-white font-bold px-10 uppercase text-xs tracking-widest hover:bg-brand-ink transition-all">Waitlist</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-20 text-center border-t border-brand-orange/10">
+        <h2 class="font-serif text-3xl text-brand-terracotta mb-4">RIYA.</h2>
+        <p class="text-[10px] tracking-widest uppercase text-brand-ink/40 font-bold">&copy; 2025 Visionary Group. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Mobile Nav Fix
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+        const mLinks = document.querySelectorAll('.m-link');
+
+        menuBtn.addEventListener('click', () => {
+            const isActive = mobileNav.classList.toggle('active');
+            menuBtn.innerHTML = isActive ? '<i class="fa-solid fa-xmark text-2xl"></i>' : '<i class="fa-solid fa-bars-staggered text-2xl"></i>';
+            document.body.style.overflow = isActive ? 'hidden' : 'auto';
+        });
+
+        mLinks.forEach(l => l.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            menuBtn.innerHTML = '<i class="fa-solid fa-bars-staggered text-2xl"></i>';
+            document.body.style.overflow = 'auto';
+        }));
+
+        // Particle Background (Peach/Orange Theme)
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize); resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3;
+                this.vx = (Math.random() - 0.5) * 0.4;
+                this.vy = (Math.random() - 0.5) * 0.4;
+            }
+            update() {
+                this.x += this.vx; this.y += this.vy;
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+            draw() {
+                ctx.fillStyle = '#e89b6a';
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill();
+            }
+        }
+        for(let i=0; i<50; i++) particles.push(new Particle());
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Map Progress
+        ScrollTrigger.create({
+            trigger: "#map-track",
+            start: "top 30%",
+            end: "bottom 80%",
+            scrub: 1,
+            onUpdate: self => {
+                const prog = self.progress;
+                const pathY = prog * 1650 + 50;
+                const pathX = 50 + (28 * Math.sin(prog * Math.PI * 2.4));
+                gsap.to("#player", { top: pathY, left: `${pathX}%`, duration: 0.15 });
+
+                const nodes = document.querySelectorAll('.level-node');
+                if(prog > 0.1) nodes[0].classList.add('active');
+                if(prog > 0.35) nodes[1].classList.add('active');
+                if(prog > 0.65) nodes[2].classList.add('active');
+                if(prog > 0.9) nodes[3].classList.add('active');
+            }
+        });
+
+        // Navbar Scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) nav.classList.add('bg-brand-peach/90', 'backdrop-blur-md', 'shadow-sm');
+            else nav.classList.remove('bg-brand-peach/90', 'backdrop-blur-md', 'shadow-sm');
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
     
 </body>
 </html>
