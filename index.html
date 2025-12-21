@@ -1264,6 +1264,251 @@
 
 
 
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIYA | Strategic Visionary</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&family=Syne:wght@700&display=swap');
+
+        :root {
+            --forest-dark: #0a110f;
+            --gold: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.3);
+        }
+
+        body {
+            background-color: var(--forest-dark);
+            color: #e4e2de;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Animated Waves Canvas */
+        #waves-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        .serif { font-family: 'Playfair Display', serif; }
+        .display { font-family: 'Syne', sans-serif; }
+
+        /* Map Styling */
+        .map-path {
+            stroke-dasharray: 10, 10;
+            animation: flow 1s linear infinite;
+        }
+        @keyframes flow { to { stroke-dashoffset: -20; } }
+
+        .level-node {
+            transition: all 0.4s ease;
+            box-shadow: 0 0 15px var(--gold-glow);
+        }
+        .level-node:hover { transform: scale(1.1); box-shadow: 0 0 30px var(--gold); }
+
+        /* No Grayscale */
+        img { filter: grayscale(0) !important; border-radius: 8px; }
+
+        .gold-border { border: 1px solid var(--gold); }
+        .perspective-1000 { perspective: 1000px; }
+    </style>
+</head>
+<body>
+
+    <canvas id="waves-canvas"></canvas>
+
+    <nav class="fixed w-full z-50 px-10 py-6 flex justify-between items-center bg-transparent">
+        <a href="#" class="display text-3xl font-bold text-lux-gold tracking-tighter">RIYA.</a>
+        <div class="hidden md:flex gap-8 text-[10px] uppercase tracking-[0.3em] font-bold">
+            <a href="#home" class="hover:text-gold transition">Home</a>
+            <a href="#journey" class="hover:text-gold transition">Map</a>
+            <a href="#services" class="hover:text-gold transition">Work</a>
+            <a href="#book" class="px-4 py-2 border border-gold text-gold hover:bg-gold hover:text-black transition">The Book</a>
+        </div>
+    </nav>
+
+    <section id="home" class="min-h-screen flex items-center pt-20 px-6 md:px-20">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-12 gap-12 items-center">
+            <div class="md:col-span-7 space-y-6">
+                <span class="gold-border px-4 py-1 rounded-full text-[10px] uppercase tracking-widest text-gold font-bold">The Personal Brand</span>
+                <h1 class="display text-6xl md:text-8xl leading-tight">
+                    I don't just solve problems.<br>
+                    <span class="serif italic text-gold font-normal">Timeless Legacy.</span>
+                </h1>
+                <p class="text-gray-400 max-w-lg leading-relaxed border-l border-gold/50 pl-6">
+                    From the sales floor to the boardroom, I help founders build foundations that last. Blending technical logic with strategic intuition.
+                </p>
+                <div class="flex gap-4">
+                    <button class="bg-gold text-black px-8 py-3 font-bold text-xs uppercase tracking-widest">Master Map</button>
+                </div>
+            </div>
+            <div class="md:col-span-5 relative">
+                <div class="p-4 gold-border rounded-2xl rotate-3 translate-x-4">
+                    <div class="rounded-xl overflow-hidden -rotate-3 -translate-x-4 shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop" alt="Riya" class="w-full h-auto">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="journey" class="py-32 relative">
+        <div class="text-center mb-24">
+            <h2 class="display text-5xl">Career Map</h2>
+        </div>
+
+        <div class="max-w-4xl mx-auto relative h-[1200px]" id="map-container">
+            <svg class="absolute inset-0 w-full h-full pointer-events-none">
+                <path id="mapPath" d="M 50% 0 C 80% 200, 20% 400, 50% 600 C 80% 800, 20% 1000, 50% 1200" fill="none" stroke="rgba(212, 175, 55, 0.2)" stroke-width="40" stroke-linecap="round"/>
+                <path class="map-path" d="M 50% 0 C 80% 200, 20% 400, 50% 600 C 80% 800, 20% 1000, 50% 1200" fill="none" stroke="#d4af37" stroke-width="2" stroke-dasharray="10 10"/>
+            </svg>
+
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center">
+                <div class="w-16 h-16 bg-black gold-border rounded-full flex items-center justify-center level-node">
+                    <i class="fa-solid fa-graduation-cap text-gold"></i>
+                </div>
+                <div class="mt-4 text-center bg-black/60 p-4 rounded-lg gold-border backdrop-blur-md">
+                    <h4 class="gold text-sm font-bold">Foundation</h4>
+                    <p class="text-[10px] text-gray-400">Finance & CS Mastery</p>
+                </div>
+            </div>
+
+            <div class="absolute top-[1100px] left-1/2 -translate-x-1/2 flex flex-col items-center">
+                <div class="w-24 h-24 bg-gold rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(212,175,55,0.5)]">
+                    <i class="fa-solid fa-crown text-black text-3xl"></i>
+                </div>
+                <h3 class="display text-2xl mt-4">FOUNDER</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6 md:px-20 bg-black/20">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="display text-5xl mb-8">Video Map<br>Services</h2>
+                <p class="text-gray-400 mb-8">Strategic insights captured in high-definition. From operations to leadership.</p>
+                <button class="px-8 py-3 gold-border text-gold uppercase text-[10px] font-bold">Watch Now</button>
+            </div>
+            <div class="grid grid-cols-3 gap-4">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=400" class="w-full aspect-square object-cover gold-border" alt="Work">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=400" class="w-full aspect-square object-cover gold-border" alt="Work">
+                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=400" class="w-full aspect-square object-cover gold-border" alt="Work">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=400" class="w-full aspect-square object-cover gold-border" alt="Work">
+                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=400" class="w-full aspect-square object-cover gold-border" alt="Work">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=400" class="w-full aspect-square object-cover gold-border" alt="Work">
+            </div>
+        </div>
+    </section>
+
+    <section id="book" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto gold-border p-12 rounded-3xl grid md:grid-cols-2 gap-12 items-center bg-black/40 backdrop-blur-xl">
+            <div class="perspective-1000">
+                <div class="w-64 h-80 bg-[#0c1613] gold-border mx-auto flex flex-col justify-center items-center p-8 shadow-2xl transform rotate-y-12">
+                     <h3 class="display text-gold text-2xl text-center">THE UNTOLD JOURNEY</h3>
+                     <p class="text-[8px] mt-4 tracking-[0.5em]">BY RIYA</p>
+                </div>
+            </div>
+            <div>
+                <h2 class="display text-4xl mb-6">RIYA. I book</h2>
+                <p class="text-gray-400 mb-8 font-light italic">"A manual for the messy middle of business."</p>
+                <form class="space-y-4">
+                    <input type="email" placeholder="Email Address" class="w-full bg-transparent border-b border-gold/30 p-4 focus:border-gold outline-none">
+                    <button class="w-full bg-gold text-black py-4 font-bold uppercase text-xs tracking-widest">Notify Me</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center text-[10px] uppercase tracking-widest text-gray-600">
+        &copy; 2024 Riya. All rights reserved.
+    </footer>
+
+    <script>
+        // --- ANIMATED AIR WAVES (Sine Waves) ---
+        const canvas = document.getElementById('waves-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, lines = [];
+        const lineCount = 5;
+
+        function init() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            lines = [];
+            for (let i = 0; i < lineCount; i++) {
+                lines.push({
+                    y: height / 2,
+                    amplitude: 50 + Math.random() * 100,
+                    frequency: 0.001 + Math.random() * 0.002,
+                    offset: Math.random() * 1000,
+                    speed: 0.01 + Math.random() * 0.02,
+                    color: `rgba(212, 175, 55, ${0.1 + Math.random() * 0.2})`
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+            lines.forEach(line => {
+                ctx.beginPath();
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = line.color;
+                for (let x = 0; x < width; x++) {
+                    const y = line.y + Math.sin(x * line.frequency + line.offset) * line.amplitude;
+                    if (x === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+                line.offset += line.speed;
+            });
+            requestAnimationFrame(draw);
+        }
+
+        init();
+        draw();
+        window.addEventListener('resize', init);
+
+        // --- MAP SCROLL ANIMATION ---
+        gsap.registerPlugin(ScrollTrigger);
+        // Add simple scroll animations for sections
+        gsap.utils.toArray('section').forEach(section => {
+            gsap.from(section, {
+                scrollTrigger: { trigger: section, start: "top 80%" },
+                opacity: 0,
+                y: 50,
+                duration: 1
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+    
+
+
 </body>
 </html>
 
